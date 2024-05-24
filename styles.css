@@ -86,7 +86,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-
 @media screen and (max-width: 768px) {
     body {
         align-items: center;
@@ -105,5 +104,15 @@ button:hover {
     #countdown {
         font-size: 1.2em;
         margin-bottom: 20px;
+    }
+
+    .greetingContainer {
+        margin-top: 10%;
+        text-align: center;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        font-size: 18px;
     }
 }
