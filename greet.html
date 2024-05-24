@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kveðja</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="greetingContainer">
+        <h1 id="greetingMessage">Góða helgi!</h1>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const encodedName = params.get('name');
+            if (encodedName) {
+                const name = atob(encodedName);  // Base64 decode the name
+                const greetingMessage = document.getElementById('greetingMessage');
+                greetingMessage.textContent = `Góða helgi, ${name}!`;
+            }
+        });
+    </script>
+</body>
+</html>
