@@ -4,15 +4,15 @@ function getNextWeekend() {
     const nextFriday = new Date();
     
     if (dayOfWeek === 5 && now.getHours() >= 19) {
-        nextFriday.setDate(now.getDate()); // It's already past 19:00 on Friday
+        nextFriday.setDate(now.getDate());
     } else {
-        nextFriday.setDate(now.getDate() + ((5 - dayOfWeek + 7) % 7)); // Get next Friday
+        nextFriday.setDate(now.getDate() + ((5 - dayOfWeek + 7) % 7)); 
     }
-    nextFriday.setHours(19, 0, 0, 0); // Set to 19:00 (7 PM) Friday
+    nextFriday.setHours(19, 0, 0, 0); 
 
     const endOfSunday = new Date(nextFriday);
-    endOfSunday.setDate(nextFriday.getDate() + 2); // Add 2 days to get to Sunday
-    endOfSunday.setHours(23, 59, 59, 999); // Set to end of Sunday
+    endOfSunday.setDate(nextFriday.getDate() + 2); 
+    endOfSunday.setHours(23, 59, 59, 999);
 
     return { nextFriday, endOfSunday };
 }
@@ -78,7 +78,7 @@ function generateLink() {
 function copyLink() {
     const linkInput = document.getElementById('generatedLink');
     linkInput.select();
-    linkInput.setSelectionRange(0, 99999); // For mobile devices
+    linkInput.setSelectionRange(0, 99999);
 
     document.execCommand("copy");
 

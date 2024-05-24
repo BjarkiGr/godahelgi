@@ -1,4 +1,3 @@
-/* Original styles for larger screens */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -69,13 +68,13 @@ button:hover {
 }
 
 .footer {
-    margin-top: auto; /* Pushes footer to the bottom */
-    padding: 10px 0; /* Adds padding to the top and bottom */
+    margin-top: auto; 
+    padding: 10px 0; 
     text-align: center;
     font-size: 0.8em;
     color: #777;
     width: 100%;
-    background-color: #f0f0f0; /* Optional: match body background */
+    background-color: #f0f0f0;
 }
 
 #linkContainer button#copy {
@@ -87,7 +86,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Optimized styles for smaller screens */
+
 @media screen and (max-width: 768px) {
     body {
         align-items: center;
@@ -95,11 +94,11 @@ button:hover {
     }
     
     #header {
-        font-size: 60px; /* Increase header size */
+        font-size: 60px;
     }
     
     .container, .greetingContainer {
-        width: 80%; /* Reduce container size */
+        width: 80%; 
         padding: 20px;
     }
 
