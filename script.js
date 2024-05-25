@@ -1,18 +1,20 @@
 function getNextWeekend() {
     const now = new Date();
     const dayOfWeek = now.getDay();
-    const nextFriday = new Date();
-    
-    if (dayOfWeek === 5 && now.getHours() >= 19) {
-        nextFriday.setDate(now.getDate());
-    } else {
-        nextFriday.setDate(now.getDate() + ((5 - dayOfWeek + 7) % 7)); 
-    }
-    nextFriday.setHours(19, 0, 0, 0); 
+    const nextFriday = new Date(now);
 
+    // Calculate the next Friday at 19:00
+    if (dayOfWeek > 5 || (dayOfWeek === 5 && now.getHours() >= 19)) {
+        nextFriday.setDate(now.getDate() + ((12 - dayOfWeek) % 7));
+    } else {
+        nextFriday.setDate(now.getDate() + ((5 - dayOfWeek + 7) % 7));
+    }
+    nextFriday.setHours(19, 0, 0, 0);
+
+    // Calculate the end of Sunday at 21:00
     const endOfSunday = new Date(nextFriday);
-    endOfSunday.setDate(nextFriday.getDate() + 2); 
-    endOfSunday.setHours(23, 59, 59, 999);
+    endOfSunday.setDate(nextFriday.getDate() + 2);
+    endOfSunday.setHours(21, 0, 0, 0);
 
     return { nextFriday, endOfSunday };
 }
@@ -25,16 +27,20 @@ function updateCountdown() {
     let headerText;
     let message;
 
-    if (now < nextFriday) {
+    // Check if the current time is during the weekend (Friday 19:00 to Sunday 21:00)
+    if ((now.getDay() === 5 && now.getHours() >= 19) || (now.getDay() === 6) || (now.getDay() === 0 && now.getHours() < 21)) {
+        target = new Date(now);
+        target.setDate(target.getDate() + (7 - now.getDay()) % 7);
+        target.setHours(21, 0, 0, 0);
+        headerText = "Góða helgi!";
+        message = "Það svona mikið eftir af helginni:";
+    } else if (now < nextFriday) {
         target = nextFriday;
         headerText = "Það styttist í helgina!";
         message = "Það verður komin helgi eftir:";
-    } else if (now <= endOfSunday) {
-        target = endOfSunday;
-        headerText = "Góða helgi!";
-        message = "Það svona mikið eftir af helginni:";
     } else {
-        target = getNextWeekend().nextFriday;
+        const nextWeekend = getNextWeekend();
+        target = nextWeekend.nextFriday;
         headerText = "Það styttist í helgina!";
         message = "Það verður komin helgi eftir:";
     }
@@ -54,7 +60,7 @@ function updateCountdown() {
 }
 
 setInterval(updateCountdown, 1000);
-updateCountdown(); 
+updateCountdown();
 
 function generateLink() {
     const name = document.getElementById('nameInput').value;
